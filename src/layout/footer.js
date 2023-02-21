@@ -10,7 +10,7 @@ import "./style.css";
 
 export const Footer = () => {
   const [emailSubmit, setEmailSubmit] = useState("");
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState(['Chính sách bảo mật', 'Thông tin chuyển khoản', 'Hướng dẫn đặt hàng', 'Chính sách đổi trả','Câu hỏi thường gặp', 'Điều khoản sử dụng','Phí và khu vực giao hàng','Bảng tin công ty']);
 
   const { data, loaded } = useSelector(state => state.companyStored);
   const onSubmitEmailSend = () => {
@@ -35,17 +35,17 @@ export const Footer = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initInfoCompany());
-    axios.get(URL_BACKEND + "/api/blogs?populate=*&filters[display][$eq]=1").then(rs => {
-      const { data } = rs;
-      setBlogs(data.data);
-    })
+    // axios.get(URL_BACKEND + "/api/blogs?populate=*&filters[display][$eq]=1").then(rs => {
+    //   const { data } = rs;
+    //   setBlogs(data.data);
+    // })
 
   }, []);
   if (loaded == true) {
     return (
       <>
         <div className="container-fluid">
-          <div className="row block mr-0 mb-0">
+          <div className="row footer-block">
             <div className="row d-flex justify-content-between mb-2">
               <div className="col-sm-6">
                 <h5>Đăng ký nhận thêm thông tin Các ưu đãi riêng biệt</h5>
@@ -73,7 +73,7 @@ export const Footer = () => {
             </div>
             <Divider />
             <div className="row mt-2 footer">
-              <div className="col-sm-3 ">
+              <div className="col-sm-4 ">
                 <img src="logo_color.png" />
                 <div className="row mt-2 mb-2">
                   <div className="col">{data[0].attributes.Slogan}</div>
@@ -89,14 +89,17 @@ export const Footer = () => {
                   </p>
                   <p className="m-0">Sđt: {data[0].attributes.phone}</p>
                 </div>
-              </div>{
+              </div>
+              <div className="row col-8 justify-content-end">
+                {
                 blogs.map((e, index) => {
-                  return <div className="col-6 col-sm-3">
-                    <Link style={{ textDecoration: 'none', color: 'black' }} to={`/blogs/${e.id}`} ><h6>{e.attributes.title}</h6></Link>
+                  return <div key={index} className="col-4 col-sm-4">
+                    <Link style={{ textDecoration: 'none', color: 'black' }}><h6 style={{textAlign : 'center'}}>{e}</h6></Link>
 
                   </div>
                 })
               }
+              </div>
 
             </div>
             <div className="row"></div>

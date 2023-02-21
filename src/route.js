@@ -96,7 +96,7 @@ export const RouteApp = () => {
           element={<PrivateRoute element={<ManageUser />} auth={authencated} />}
         />
       </Routes>
-      <Footer />
+       <Footer/>
       <ToastContainer />
     </Router>
   );

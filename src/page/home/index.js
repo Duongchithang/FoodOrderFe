@@ -51,18 +51,17 @@ export const Home = ({ divRef }) => {
   const [title, setTitle] = useState("");
   const [amountCus, setAmountCus] = useState("");
 
-
   const location = useLocation();
-  React.useEffect(()=>{
-   // console.log(location.pathname)
-      if(location.pathname=="/dat-tiec"){
-        divRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-          inline: "center",
-        });
-      }
-  },[location.pathname]);
+  React.useEffect(() => {
+    // console.log(location.pathname)
+    if (location.pathname == "/dat-tiec") {
+      divRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center",
+      });
+    }
+  }, [location.pathname]);
 
   //const notify = () => toast("Wow so easy!");
   const handleChangeRange = (event, newValue) => {
@@ -71,7 +70,7 @@ export const Home = ({ divRef }) => {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-
+  console.log(listType);
   const handleSubmit = () => {
     const data = {
       data: {
@@ -93,9 +92,7 @@ export const Home = ({ divRef }) => {
           toast("Gửi thông tin thành công");
         }
       })
-      .catch((err) =>
-        toast("Gửi thông tin thất bại vui lòng kiểm tra lại các ô yêu cầu ")
-      );
+      .catch((err) => toast("Gửi thông tin thất bại vui lòng kiểm tra lại các ô yêu cầu "));
   };
 
   const [background, setBackground] = useState(CarouselMock);
@@ -103,14 +100,12 @@ export const Home = ({ divRef }) => {
     let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(url).then((rs) => {
       let { data } = rs;
-      //  //console.log(data.data);
+      console.log(data.data);
       setBackground(data.data);
     });
-    //let url = URL_BACKEND + `/api/banners?populate=*`;
     axios
       .get(
-        URL_BACKEND +
-          `/api/big-categories?populate=*&sort[0]=Index:desc&sort[1]=publishedAt:desc`
+        URL_BACKEND + `/api/big-categories?populate=*&sort[0]=Index:desc&sort[1]=publishedAt:desc`
       )
       .then((rs) => {
         let { data } = rs;
@@ -118,10 +113,7 @@ export const Home = ({ divRef }) => {
         setListType(data.data);
       });
     axios
-      .get(
-        URL_BACKEND +
-          `/api/blogs?populate=*&sort=index:desc&sort[1]=publishedAt:desc`
-      )
+      .get(URL_BACKEND + `/api/blogs?populate=*&sort=index:desc&sort[1]=publishedAt:desc`)
       .then((rs) => {
         let { data } = rs;
         data.data = data.data.filter((e, index) => index <= 2);
@@ -133,7 +125,7 @@ export const Home = ({ divRef }) => {
 
   return (
     <>
-      <div className="full-width">
+      <div className="full-width-home">
         <div className="slide">
           <Carousel autoPlay interval={2000}>
             {background.map((e, index) => (
@@ -144,16 +136,16 @@ export const Home = ({ divRef }) => {
                   backgroundImage: `URL(
                     "${URL_BACKEND + e.attributes.Media.data.attributes.url}"
                   )`,
+                  width: "100%",
+                  height: "100%",
                 }}
-              >
-                <p className="legend">{e.attributes.Title}</p>
-              </div>
+              ></div>
             ))}
           </Carousel>
         </div>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div className="container">
-            <div className="row block">
+            <div className="row block space">
               <div className="row d-flex justify-content-center">
                 <div className="col-sm-12 d-flex justify-content-center">
                   <h3 className="hignl-title" ref={divRef}>
@@ -177,9 +169,7 @@ export const Home = ({ divRef }) => {
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3">
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">
-                      Giờ bắt đầu tiệc*
-                    </InputLabel>
+                    <InputLabel id="demo-simple-select-label">Giờ bắt đầu tiệc*</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
@@ -192,16 +182,10 @@ export const Home = ({ divRef }) => {
                       {new Array(18).fill().map((e, index) => {
                         if (index + 6 < 10) {
                           return (
-                            <MenuItem value={`0${index + 6}:00`}>{`${
-                              index + 6
-                            }:00`}</MenuItem>
+                            <MenuItem value={`0${index + 6}:00`}>{`${index + 6}:00`}</MenuItem>
                           );
                         } else {
-                          return (
-                            <MenuItem value={`${index + 6}:00`}>{`${
-                              index + 6
-                            }:00`}</MenuItem>
-                          );
+                          return <MenuItem value={`${index + 6}:00`}>{`${index + 6}:00`}</MenuItem>;
                         }
                       })}
                     </Select>
@@ -211,10 +195,10 @@ export const Home = ({ divRef }) => {
                   <DesktopDatePicker
                     label="Ngày diễn ra tiệc: *"
                     value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => (
-                      <TextField fullWidth {...params} />
-                    )}
+                    onChange={(e) => {
+                      handleChange(e.target.value);
+                    }}
+                    renderInput={(params) => <TextField fullWidth {...params} />}
                   />
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-3 ">
@@ -241,11 +225,12 @@ export const Home = ({ divRef }) => {
                     color="error"
                     variant="contained"
                     onClick={() => {
-                      navigate(
-                        `/filter-tiec?from=${100000}&to=${
-                          range * 20000
-                        }&amount=${amountCus}&time=${time}`
-                      );
+                      // navigate(
+                      //   `/filter-tiec?from=${100000}&to=${
+                      //     range * 20000
+                      //   }&amount=${amountCus}&time=${time}`
+                      // );
+                      console.log({ amountCus, time, value });
                     }}
                   >
                     Xác nhận
@@ -263,41 +248,31 @@ export const Home = ({ divRef }) => {
               </div>
             </div>
             {listType.map((e, index) => {
-              if (index < 3) {
-                return (
-                  <Link
-                    key={index}
-                    style={{ textDecoration: "none" }}
-                    to={`mota-tiec/${e.id}`}
-                    className={
-                      index % 2 === 0
-                        ? "row d-flex m-2"
-                        : "row d-flex flex-row-reverse m-2"
-                    }
-                  >
-                    <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
-                      <LazyLoadImage
-                        src={
-                          URL_BACKEND + e.attributes.Avatar.data.attributes.url
-                        }
-                        style={{height:250}}
-                        alt=""
-                      />
-                    </div>
-                    <div className="col-sm-12 col-md-6">
-                      <h3 className="title-article">{e.attributes.name}</h3>
-                      <p
-                        className="
+              return (
+                <Link
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                  to={`mota-tiec/${e.id}`}
+                  className={index % 2 === 0 ? "row d-flex m-2" : "row d-flex flex-row-reverse m-2"}
+                >
+                  <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
+                    <LazyLoadImage
+                      src={URL_BACKEND + e.attributes.Media.data[0].attributes.url}
+                      style={{ height: 250 }}
+                      alt=""
+                    />
+                  </div>
+                  <div className="col-sm-12 col-md-6">
+                    <h3 className="title-article">{e.attributes.name}</h3>
+                    <p
+                      className="
                       description-primary"
-                      >
-                        {parse(e.attributes.Description)}
-                      </p>
-                    </div>
-                  </Link>
-                );
-              } else {
-                return null;
-              }
+                    >
+                      {parse(e.attributes.content)}
+                    </p>
+                  </div>
+                </Link>
+              );
             })}
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">
@@ -330,23 +305,16 @@ export const Home = ({ divRef }) => {
                       : "img_emty.png";
                   return (
                     <div key={index} className="col-sm-12 col-md-12 col-lg-8">
-                      <Link
-                        to={`/blogs/${e.id}`}
-                        style={{ textDecoration: "none" }}
-                      >
+                      <Link to={`/blogs/${e.id}`} style={{ textDecoration: "none" }}>
                         <div className="row d-flex justify-content-center">
                           <div className="d-flex flex-column">
                             <div className="fit-content">
                               <LazyLoadImage src={img} />
                             </div>
                             <div className="">
-                              <h3 className="title-article">
-                                {e.attributes.title}
-                              </h3>
+                              <h3 className="title-article">{e.attributes.title}</h3>
                               <p className="description">
-                                {moment(e.attributes.publishedAt).format(
-                                  "DD/MM/YYYY HH:mm"
-                                )}
+                                {moment(e.attributes.publishedAt).format("DD/MM/YYYY HH:mm")}
                               </p>
                               <p className="description">
                                 {e.attributes.description.substring(0, 1000)}
@@ -374,10 +342,7 @@ export const Home = ({ divRef }) => {
                         ? URL_BACKEND + e.attributes.Media.data.attributes.url
                         : "img_emty.png";
                     return (
-                      <Link key={index}
-                        to={`/blogs/${e.id}`}
-                        style={{ textDecoration: "none" }}
-                      >
+                      <Link key={index} to={`/blogs/${e.id}`} style={{ textDecoration: "none" }}>
                         <div className="row d-flex justify-content-center">
                           <div className="d-flex flex-column">
                             <div className="fit-cover">
@@ -393,9 +358,7 @@ export const Home = ({ divRef }) => {
                               </h5>
                               <p className="description">
                                 {" "}
-                                {moment(e.attributes.publishedAt).format(
-                                  "DD/MM/YYYY HH:mm"
-                                )}
+                                {moment(e.attributes.publishedAt).format("DD/MM/YYYY HH:mm")}
                               </p>
                               <p className="description">
                                 {e.attributes.description.substring(0, 180)}
@@ -496,11 +459,7 @@ export const Home = ({ divRef }) => {
             </div>
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={handleSubmit}
-                >
+                <Button variant="contained" color="error" onClick={handleSubmit}>
                   Gửi thông tin
                 </Button>
               </div>

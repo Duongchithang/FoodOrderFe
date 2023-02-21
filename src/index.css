@@ -9,7 +9,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.space{
+  margin-top: 30px;
+}
 .row.block {
   margin-top: 30px !important;
   margin-bottom: 30px !important;
@@ -20,13 +22,22 @@ code {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-right: 15px;
+    padding-left: 15px;
 }
 
-.row.block {
+ .footer-block{
+  /* margin-top: 30px !important; */
+  margin-bottom: 30px !important;
+  padding: 30px;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-right: 15px;
   padding-left: 15px;
-  /* margin-right: auto;
-  margin-left: auto; */
 }
 
 .hignl-title {
@@ -225,11 +236,7 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
 
 }
 
-.full-width1 {
-  background-color: #F2F2F2;
-  padding-top: 40px;
-  padding-bottom: 40px;
-}
+
 
 .block-top {
   padding: 30px;
@@ -240,10 +247,16 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
   justify-content: center;
   align-items: center;
 }
-
+.full-width-home{
+    background-color: #F2F2F2;
+      min-height: 800px;
+      padding-bottom: 50px;
+}
 .full-width {
   background-color: #F2F2F2;
   min-height: 800px;
+  padding-top: 30px;
+  padding-bottom: 50px;
 }
 
 .legend {
@@ -288,15 +301,18 @@ button.MuiButton-contained.MuiButton-containedWarning.MuiButton-sizeMedium.MuiBu
   .hignl-title {
     font-size: 24px !important;
     font-weight: 800;
+
   }
-}
-.slide{
-  height: 100%
+    .slide {
+      height: 300px;
+    }
+  
+    .row.block {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+    .full-width{
+      padding-top: 10px;
+    }
 }
 
-@media only screen and (max-width: 600px) {
-  .row.block{
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
-}
