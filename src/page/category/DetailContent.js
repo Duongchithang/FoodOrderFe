@@ -27,7 +27,7 @@ export const DetailContent = () => {
   };
   useEffect(() => {
     axios
-      .get(URL_BACKEND + `/api/big-categories/${id}?populate=deep,3`)
+      .get(URL_BACKEND + `/api/big-categories/${id}?populate=*`)
       .then((rs) => {
         var res = rs.data;
         //  console.log(res);
@@ -40,7 +40,7 @@ export const DetailContent = () => {
             },
           };
         }
-
+       console.log(res);
         setCategory(res);
         setLoaded(true);
       });
@@ -72,8 +72,7 @@ export const DetailContent = () => {
                     borderRadius: 10,
                   }}
                   src={
-                    URL_BACKEND +
-                    category.data.attributes.Avatar.data.attributes.url
+                    category.data.attributes.Media.data[0].attributes.url
                   }
                   alt=""
                 />

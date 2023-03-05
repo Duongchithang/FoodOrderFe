@@ -13,8 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useLocation, useNavigate } from "react-router-dom";
-import { isJwtExpired } from "jwt-check-expiration";
-import isJwtTokenExpired, { decode } from "jwt-check-expiry";
+// import { isJwtExpired } from "jwt-check-expiration";
+// import isJwtTokenExpired, { decode } from "jwt-check-expiry";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../app/reducer/UserSlice";
 
@@ -182,9 +182,7 @@ const Header = ({ handleScroll }) => {
                   <Typography
                     textAlign="center"
                     onClick={() => {
-
                       handleClickNav(e.path);
-
                     }}
                   >
                     {e.name}

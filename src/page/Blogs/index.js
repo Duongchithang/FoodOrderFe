@@ -9,7 +9,7 @@ import './style.css'
 export const Blogs = () => {
   const [blog, setBlog] = useState([]);
   useEffect(() => {
-    axios.get(URL_BACKEND + `/api/blogs?populate=*&filters[display][$eq]=0`).then((rs) => {
+    axios.get(URL_BACKEND + `/api/blogs/?populate=*`).then((rs) => {
       let { data } = rs;
       // data.data = data.data.filter((e, index) => index <= 2);
       setBlog(data.data);
@@ -43,7 +43,7 @@ export const Blogs = () => {
                             height: 200,
                           }}
                           src={
-                            URL_BACKEND + e.attributes.Media.data.attributes.url
+                            e.attributes.Media.data.attributes.url
                           }
                           alt={
                             e.attributes.Media.data.attributes.alternativeText
@@ -64,9 +64,9 @@ export const Blogs = () => {
                         >
                           {e.attributes.title}
                         </h3>
-
+                        
                         <p className="description">
-                          {e.attributes.description}
+                          {e.attributes.Content}
 
                         </p>
                       </div>

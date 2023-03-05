@@ -25,7 +25,7 @@ export const BlogDetails = () => {
     axios.get(URL_BACKEND + `/api/blogs/${id}?populate=*`).then((rs) => {
       const { data } = rs;
       const article = data.data.attributes;
-      setImg(URL_BACKEND + article.Media.data.attributes.url);
+      setImg(article.Media.data.attributes.url);
       //console.log(article)
       setTitle(article.title);
       setTime(article.publishedAt);
@@ -38,7 +38,7 @@ export const BlogDetails = () => {
       );
       setContent(article.Content);
     });
-    axios.get(URL_BACKEND + `/api/blogs?populate=*&filters[display][$eq]=0`).then(rs => {
+    axios.get(URL_BACKEND + `/api/blogs?populate=*`).then(rs => {
       const { data } = rs;
       setBlogs(data.data);
       // console.log(data.data)
@@ -52,7 +52,7 @@ export const BlogDetails = () => {
 
           <div className="row">
             <div className="col">
-              <img style={{ width: "100%" }} src={img} alt="" />
+              <img style={{ width: "100%", height:'500px', objectFit:'cover' }} src={img} alt="" />
             </div>
           </div>
           <div className="row d-flex justify-content-center">
@@ -78,7 +78,7 @@ export const BlogDetails = () => {
             </div>
           </div>
           <div className="row">
-            <h3 style={{ fontSize: 20, fontWeight: 'bold' }}>Bài viết khác</h3>
+            <h3 style={{ fontSize: 20, fontWeight: 'bold', marginTop : '20px' }}>Bài viết khác</h3>
             <Carousel responsive={responsive}>
               {
                 blogs.map((e, index) => {
@@ -93,7 +93,7 @@ export const BlogDetails = () => {
                               height: 200,
                             }}
                             src={
-                              URL_BACKEND + e.attributes.Media.data.attributes.url
+                               e.attributes.Media.data.attributes.url
                             }
                             alt={
                               e.attributes.Media.data.attributes.alternativeText

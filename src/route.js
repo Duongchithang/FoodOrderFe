@@ -22,7 +22,7 @@ import { Register } from "./page/Register";
 import GoogleAuthCallback from "./page/GoogleCallBack";
 import FacebookCallBack from "./page/FacebookCallBack";
 import { useDispatch, useSelector } from "react-redux";
-import { decode } from "jwt-check-expiry";
+// import { decode } from "jwt-check-expiry";
 import { login, logout } from "./app/reducer/UserSlice";
 import { UserInfo } from "./page/User";
 import ManageUser from "./page/ManageUser";
@@ -74,7 +74,7 @@ export const RouteApp = () => {
       <Routes>
         <Route exact path="/" element={<Home divRef={divRef} />} />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/dat-tiec" element={<Home divRef={divRef} />} />
+        <Route exact path="/dat-tiec" element={<Home divRef={divRef} />}/>
         <Route exact path="/cac-loai-tiec" element={<Category />} />
         <Route exact path="/cac-loai-tiec/:id" element={<DetailCategory />} />
         <Route exact path="/blogs" element={<Blogs />} />

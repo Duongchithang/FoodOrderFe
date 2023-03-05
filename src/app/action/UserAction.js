@@ -20,6 +20,7 @@ export const LoginAction = createAsyncThunk("login/User", async (user) => {
       `${URL_BACKEND}/api/auth/local`,
       user
     );
+    console.log(data)
     localStorage.setItem("UserInfo", JSON.stringify(data));
     return data;
   } catch (e) {

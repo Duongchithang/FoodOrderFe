@@ -50,7 +50,7 @@ export const Home = ({ divRef }) => {
   const [address, setAddress] = useState("");
   const [title, setTitle] = useState("");
   const [amountCus, setAmountCus] = useState("");
-
+  console.log(blog);
   const location = useLocation();
   React.useEffect(() => {
     // console.log(location.pathname)
@@ -70,7 +70,6 @@ export const Home = ({ divRef }) => {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
-  console.log(listType);
   const handleSubmit = () => {
     const data = {
       data: {
@@ -100,29 +99,24 @@ export const Home = ({ divRef }) => {
     let url = URL_BACKEND + `/api/banners?populate=*`;
     axios.get(url).then((rs) => {
       let { data } = rs;
-      console.log(data.data);
+      console.log(background);
       setBackground(data.data);
     });
-    axios
-      .get(
-        URL_BACKEND + `/api/big-categories?populate=*&sort[0]=Index:desc&sort[1]=publishedAt:desc`
-      )
-      .then((rs) => {
-        let { data } = rs;
-        // //console.log(data.data);
-        setListType(data.data);
-      });
-    axios
-      .get(URL_BACKEND + `/api/blogs?populate=*&sort=index:desc&sort[1]=publishedAt:desc`)
-      .then((rs) => {
-        let { data } = rs;
-        data.data = data.data.filter((e, index) => index <= 2);
-        setBlog(data.data);
-      });
+    axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
+      let { data } = rs;
+      // console.log(data.data);
+      console.log(data);
+      setListType(data.data);
+    });
+    axios.get(URL_BACKEND + `/api/blogs?populate=*`).then((rs) => {
+      let { data } = rs;
+      data.data = data.data.filter((e, index) => index <= 3);
+      setBlog(data.data);
+    });
 
     return () => {};
   }, []);
-
+  console.log(blog);
   return (
     <>
       <div className="full-width-home">
@@ -134,7 +128,7 @@ export const Home = ({ divRef }) => {
                 key={index}
                 style={{
                   backgroundImage: `URL(
-                    "${URL_BACKEND + e.attributes.Media.data.attributes.url}"
+                    "${e.attributes.Media.data.attributes.url}"
                   )`,
                   width: "100%",
                   height: "100%",
@@ -230,6 +224,7 @@ export const Home = ({ divRef }) => {
                       //     range * 20000
                       //   }&amount=${amountCus}&time=${time}`
                       // );
+                      navigate('/dat-tiec')
                       console.log({ amountCus, time, value });
                     }}
                   >
@@ -250,14 +245,14 @@ export const Home = ({ divRef }) => {
             {listType.map((e, index) => {
               return (
                 <Link
-                  key={index}
+                  key={e.id}
                   style={{ textDecoration: "none" }}
                   to={`mota-tiec/${e.id}`}
                   className={index % 2 === 0 ? "row d-flex m-2" : "row d-flex flex-row-reverse m-2"}
                 >
                   <div className="col-sm-12 col-md-6 col-lg-3 fit-content">
                     <LazyLoadImage
-                      src={URL_BACKEND + e.attributes.Media.data[0].attributes.url}
+                      src={e.attributes.Media.data[0].attributes.url}
                       style={{ height: 250 }}
                       alt=""
                     />
@@ -270,6 +265,7 @@ export const Home = ({ divRef }) => {
                     >
                       {parse(e.attributes.content)}
                     </p>
+                    <p className="description-primary">{e.attributes.Description}</p>
                   </div>
                 </Link>
               );
@@ -298,10 +294,10 @@ export const Home = ({ divRef }) => {
             </div>
             <div className="row">
               {blog.map((e, index) => {
-                if (index === 0) {
+                if (index % 2 === 0) {
                   var img =
                     e.attributes.Media.data != null
-                      ? URL_BACKEND + e.attributes.Media.data.attributes.url
+                      ? e.attributes.Media.data.attributes.url
                       : "img_emty.png";
                   return (
                     <div key={index} className="col-sm-12 col-md-12 col-lg-8">
@@ -309,7 +305,7 @@ export const Home = ({ divRef }) => {
                         <div className="row d-flex justify-content-center">
                           <div className="d-flex flex-column">
                             <div className="fit-content">
-                              <LazyLoadImage src={img} />
+                              <LazyLoadImage style={{ width: "100%", height: "500px" }} src={img} />
                             </div>
                             <div className="">
                               <h3 className="title-article">{e.attributes.title}</h3>
@@ -327,21 +323,12 @@ export const Home = ({ divRef }) => {
                     </div>
                   );
                 } else {
-                  return null;
-                }
-              })}
-              <div className="col-sm-12 col-md-12 col-lg-4">
-                {blog.map((e, index) => {
-                  if (index === 0) {
-                    return null;
-                  } else {
-                    //console.log(e.attributes.Media.data);
-
                     var img =
-                      e.attributes.Media.data != null
-                        ? URL_BACKEND + e.attributes.Media.data.attributes.url
-                        : "img_emty.png";
-                    return (
+                    e.attributes.Media.data != null
+                      ? e.attributes.Media.data.attributes.url
+                      : "img_emty.png";
+                  return (
+                    <div className="row col-sm-12 col-md-12 col-lg-4">
                       <Link key={index} to={`/blogs/${e.id}`} style={{ textDecoration: "none" }}>
                         <div className="row d-flex justify-content-center">
                           <div className="d-flex flex-column">
@@ -368,10 +355,10 @@ export const Home = ({ divRef }) => {
                           </div>
                         </div>
                       </Link>
-                    );
-                  }
-                })}
-              </div>
+                    </div>
+                  );
+                }
+              })}
             </div>
             <div className="row d-flex justify-content-center mt-4">
               <div className=".col-sm-12 d-flex justify-content-center">

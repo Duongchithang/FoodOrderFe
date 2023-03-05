@@ -28,7 +28,7 @@ export const FilterCategory = () => {
     axios
       .get(
         URL_BACKEND +
-        `/api/big-categories?populate=deep,3&filters[FromTime][$lte]=${time}&filters[amount][$lte]=${amount}&filters[price][$lte]=${parseInt(to) + 100000}`
+        `/api/big-categories?populate=*`
       )
       .then((rs) => {
         let { data } = rs;
@@ -76,8 +76,7 @@ export const FilterCategory = () => {
                         <div className="col">
                           <img
                             className="item-img"
-                            src={
-                              URL_BACKEND +
+                            src={      
                               e.attributes.Avatar.data.attributes.url
                             }
                             alt=""

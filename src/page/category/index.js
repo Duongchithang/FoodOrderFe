@@ -11,7 +11,7 @@ export const Category = () => {
   useEffect(() => {
     axios.get(URL_BACKEND + `/api/big-categories?populate=*`).then((rs) => {
       let { data } = rs;
-      //console.log(data.data);
+      console.log(data.data);
       setBigCategory(data.data);
     });
 
@@ -39,8 +39,7 @@ export const Category = () => {
                         <LazyLoadImage
                           className="item-img"
                           src={
-                            URL_BACKEND +
-                            e.attributes.Avatar.data.attributes.url
+                            e.attributes.Media.data[0].attributes.url
                           }
                           alt=""
                         />
