@@ -74,7 +74,7 @@ export const Footer = () => {
             <Divider />
             <div className="row mt-2 footer">
               <div className="col-sm-4 ">
-                <img src="logo_color.png" />
+                <h1>Chithangtiec</h1>
                 <div className="row mt-2 mb-2">
                   <div className="col">{data[0].attributes.Slogan}</div>
                 </div>
@@ -90,10 +90,10 @@ export const Footer = () => {
                   <p className="m-0">Sđt: {data[0].attributes.phone}</p>
                 </div>
               </div>
-              <div className="row col-8 justify-content-end">
+              <div className="row col-12 col-sm-8 justify-content-end mt-4 mt-sm-0">
                 {
                 blogs.map((e, index) => {
-                  return <div key={index} className="col-4 col-sm-4">
+                  return <div key={index} className="col-12 col-sm-4">
                     <Link style={{ textDecoration: 'none', color: 'black' }}><h6 style={{textAlign : 'center'}}>{e}</h6></Link>
 
                   </div>

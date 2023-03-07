@@ -159,10 +159,10 @@ export const DetailContent = () => {
                               height: 200,
                             }}
                             src={
-                              URL_BACKEND + e.attributes.url
+                              e.attributes.url
                             }
                             alt={
-                              URL_BACKEND + e.attributes.url
+                              e.attributes.url
                             }
                           />
                         </div>

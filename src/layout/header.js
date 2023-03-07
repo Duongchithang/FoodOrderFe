@@ -145,7 +145,7 @@ const Header = ({ handleScroll }) => {
               textDecoration: "none",
             }}
           >
-            <img src="logo.png" />
+            <h1 style={{fontSize : "18px"}}>ChiThangtiec</h1>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -208,7 +208,7 @@ const Header = ({ handleScroll }) => {
               textDecoration: "none",
             }}
           >
-            <img src="logo.png" />
+            <h1 style={{fontSize:"16px"}}>Chithangtiec</h1>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((e, index) => (

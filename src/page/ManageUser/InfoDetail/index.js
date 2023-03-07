@@ -6,6 +6,7 @@ import { memo, useState } from "react";
 import axios from "axios";
 import { URL_BACKEND } from "../../../constants";
 import moment from "moment";
+import React from "react";
 function InfoDetail() {
   const { users, user } = useSelector((state) => state.userReducer);
   //   const user = users.user;

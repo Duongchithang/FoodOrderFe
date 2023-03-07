@@ -305,7 +305,7 @@ export const Home = ({ divRef }) => {
                         <div className="row d-flex justify-content-center">
                           <div className="d-flex flex-column">
                             <div className="fit-content">
-                              <LazyLoadImage style={{ width: "100%", height: "500px" }} src={img} />
+                              <LazyLoadImage  style={{ width: "100%", height : '400px' }} src={img} />
                             </div>
                             <div className="">
                               <h3 className="title-article">{e.attributes.title}</h3>

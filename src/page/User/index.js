@@ -1,6 +1,6 @@
 import style from "./index.module.css";
 import Button from "@mui/material/Button";
-
+import React from "react";
 export const UserInfo = () => {
   return (
     <div>

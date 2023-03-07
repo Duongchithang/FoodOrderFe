@@ -1,5 +1,6 @@
 import style from "./index.module.css";
 import Button from "@mui/material/Button";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import InfoDetail from "./InfoDetail";
 import HistoryTransaction from "./HistoryTransaction";
